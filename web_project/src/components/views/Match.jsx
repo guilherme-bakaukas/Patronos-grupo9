@@ -1,33 +1,10 @@
 import DatabaseManager from '../../services/UserServices'
 import firebase from '../../firebase'
-import React, {Component} from 'react'
+import React, {Component, useEffect, useState} from 'react'
 import { Container } from 'react-bootstrap'
 import './Match.css'
 
-class Mentoria extends Component{
-
-    constructor(props){
-        super(props)
-        this.state={
-            mentores : []
-        }
-
-        this.setMentores = this.setMentores.bind(this);
-        this.getMentores = this.getMentores.bind(this);
-    }
-
-    setMentores(newMentores){
-        this.setState({mentores: newMentores})
-    }
-
-    getMentores(){
-        return this.state.mentores
-    }
-}
-
-const mentoria = new Mentoria()
-
-const getMentores=async (info)=>{
+const getMentores = async (info)=> {
     console.log(info)
     var databaseManager = new DatabaseManager()
 
@@ -46,39 +23,37 @@ const getMentores=async (info)=>{
     //console.log(user_info)
     await databaseManager.addUsertoDatabase("Mentorados", user_info)
     const mentores = databaseManager.findMatch(info.materias)
-    console.log(mentores)
-    mentoria.setMentores(mentores)
-    window.location.href ='/Match'
+    return mentores
 }
 
-const Match=()=>{
-    //console.log(mentoria.getMentores())
-    return(
+const Match = ({ location }) => {
+    const [mentores, setMentores] = useState([])
+    const { state } = location
+
+    useEffect(() => {
+      getMentores(state)
+        .then((res) => {
+          setMentores(res)
+        })
+    }, [state])
+
+    return (
         <div className='match'>
-            
             <h2 className='mt-4'>Encontramos algumas opções para você...</h2>
             <h5 className='mt-4 mb-3'>Selecione seu mentor</h5>
-            <button className='ml-3 btn btn-primary'>
-                <h3>Nome</h3>
-                <p>Descrição</p>
-            </button>
-            <button className='ml-3 btn btn-primary'>
-                <h3>Nome</h3>
-                <p>Descrição</p>
-            </button>
-            <button className='ml-3 btn btn-primary'>
-                <h3>Nome</h3>
-                <p>Descrição</p>
-            </button>
+            {mentores.map((mentor) => (
+              <>
+              <button className='ml-3 btn btn-primary'>
+                  <h3>{mentor.nome}</h3>
+                  <p>{mentor.description}</p>
+              </button>
+              </>
+            ))}
         </div>
-
     )
-}    
+} 
 
-export {
-    getMentores,
-    Match
-}
+export default Match
 
 /*
             <h2>Encontramos algumas opções para você...</h2>

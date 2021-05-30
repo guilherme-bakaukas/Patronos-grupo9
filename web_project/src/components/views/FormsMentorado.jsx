@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import firebase from '../../firebase'
 import DatabaseManager from '../../services/UserServices'
-import {getMentores, Match} from './Match.jsx'
+import { withRouter } from "react-router";
 
 
-export default class FormsMentorado extends Component{
+class FormsMentorado extends Component {
 
     constructor(props){
         super(props)
-        this.state={
+        this.state = {
             materias: {"Biologia": false, "Matematica": false, "Português": false},
             name: '',
             email:'',
             tel:''
         }
+
+        this.history = this.props.history
         this.save = this.save.bind(this)
         this.updateName = this.updateName.bind(this);
         this.updateEmail = this.updateEmail.bind(this);
@@ -45,13 +47,19 @@ export default class FormsMentorado extends Component{
         this.setState({materias:materias_aux})
         
     }
-    save(e){
-        console.log(this.state)
+
+    save(e) {
         e.preventDefault()
-        getMentores(this.state)
+        this.props.history.push({
+          pathname: '/Match',
+          state: {
+            ...this.state
+          }
+        })
     }
     
     render(){
+      
         return(
             <div className="p-5">
                 
@@ -137,3 +145,6 @@ export default class FormsMentorado extends Component{
     }
     
 }
+
+const FormsMentorados = withRouter(FormsMentorado);
+export default FormsMentorados
