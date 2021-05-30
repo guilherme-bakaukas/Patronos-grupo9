@@ -6,7 +6,6 @@ import firebase from '../firebase'
     constructor(props) {
         this.usersRefName = "Users"
         this.database = database
-        this.mentoresMatch = []
     }
 
     createUserIfNeeded(user) {
@@ -95,9 +94,6 @@ import firebase from '../firebase'
         return mentores
     }
 
-    findSubjects(uid){
-        console.log(database.ref('Mentorado').child(uid))
-    }
 }
 
   

@@ -27,7 +27,7 @@ class Mentoria extends Component{
 
 const mentoria = new Mentoria()
 
-const getMentores=(info)=>{
+const getMentores=async (info)=>{
     console.log(info)
     var databaseManager = new DatabaseManager()
 
@@ -44,7 +44,7 @@ const getMentores=(info)=>{
     //enviar os dados para o backend
     
     //console.log(user_info)
-    databaseManager.addUsertoDatabase("Mentorados", user_info)
+    await databaseManager.addUsertoDatabase("Mentorados", user_info)
     const mentores = databaseManager.findMatch(info.materias)
     console.log(mentores)
     mentoria.setMentores(mentores)

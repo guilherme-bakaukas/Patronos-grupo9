@@ -21,11 +21,6 @@ export default class FormsMentorado extends Component{
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    //const [materias, setMaterias] = useState({"Biologia": false, "Matematica": false, "Português": false,})
-    //const [name, setName] = useState('')
-    //const [email, setEmail] = useState('')
-    //const [tel, setTel] = useState('')
-
     updateName(e){
         this.setState({name: e.target.value})
     }
@@ -55,34 +50,6 @@ export default class FormsMentorado extends Component{
         e.preventDefault()
         getMentores(this.state)
     }
-    /*
-    save(e){
-
-        e.preventDefault()
-    
-        var databaseManager = new DatabaseManager()
-        
-        var user = firebase.auth().currentUser;
-    
-        const user_info = 
-        {
-            "nome": thi.state.name,
-            "materias": this.state.materias,
-            "email": this.state.email,
-            "tel": this.state.tel,
-            "uid": user.uid
-    
-        }
-        //enviar os dados para o backend
-    
-        console.log(user_info)
-        //databaseManager.addUsertoDatabase("Mentorados", user_info)
-        var mentores = getMentores(materias)
-        //mentores = databaseManager.findMatch(materias)
-        window.location.href ='/Match'
-    }    
-
-    */
     
     render(){
         return(

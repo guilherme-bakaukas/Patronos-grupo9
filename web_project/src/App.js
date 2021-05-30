@@ -5,7 +5,7 @@ import InitialPage from "./components/views/InitialPage"
 import FormsMentor from "./components/views/FormsMentor"
 import FormsMentorado from "./components/views/FormsMentorado"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { AuthProvider } from "./context/Auth";
+import { AuthProvider } from "./context/AuthContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {getMentores, Match} from './components/views/Match.jsx'
 

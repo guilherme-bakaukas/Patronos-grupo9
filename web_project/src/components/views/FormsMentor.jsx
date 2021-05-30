@@ -37,7 +37,7 @@ export default function FormsMentor(){
         
     }
 
-    function save(e){
+    async function save(e){
         var databaseManager = new DatabaseManager()
         
         e.preventDefault()
@@ -58,8 +58,8 @@ export default function FormsMentor(){
         //enviar os dados para o backend
 
         console.log(user_info)
-        databaseManager.addUsertoDatabase("Mentores", user_info)
-        window.location.href ='/Match'
+        await databaseManager.addUsertoDatabase("Mentores", user_info)
+        window.location.href ='/initialPage'
     }    
 
 
